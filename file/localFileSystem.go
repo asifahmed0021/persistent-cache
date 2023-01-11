@@ -19,3 +19,21 @@ type LocalFileSystem struct{
 	Name string
 	File *os.File
 }
+
+func (f LocalFileSystem) Append(key string, value string) error{
+	fileScanner := bufio.NewScanner(f.File)
+ 
+    fileScanner.Split(bufio.ScanLines)
+  
+    for fileScanner.Scan() {
+        text := fileScanner.Text()
+		words := strings.Fields(text)
+		if(words[0]==key){
+			return errors.New("key already exists")
+		}
+    }
+
+	f.File.WriteString(key + " " + value + "\n")
+
+	return nil
+}
