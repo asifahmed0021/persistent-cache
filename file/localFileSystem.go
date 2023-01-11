@@ -1,7 +1,6 @@
 package file
 
-import ("fmt"
-		"os"
+import ("os"
 		"bufio"
 		"strings"
 		"errors")
