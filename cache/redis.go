@@ -13,3 +13,9 @@ type Redis struct{
 	Name string
 	FileSystem f.FileSystem
 }
+
+func (r Redis) Put(key string, value string) error{
+	err := r.FileSystem.Append(key, value)
+
+	return err
+}
