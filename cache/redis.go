@@ -19,3 +19,9 @@ func (r Redis) Put(key string, value string) error{
 
 	return err
 }
+
+func (r Redis) Get(key string) (string, error) {
+	value, err := r.FileSystem.GetValueForKey(key)
+
+	return value, err
+}
