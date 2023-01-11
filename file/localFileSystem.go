@@ -37,3 +37,21 @@ func (f LocalFileSystem) Append(key string, value string) error{
 
 	return nil
 }
+
+func (f LocalFileSystem) GetValueForKey(key string) (string, error){
+	readFile := f.File
+  
+    fileScanner := bufio.NewScanner(readFile)
+ 
+    fileScanner.Split(bufio.ScanLines)
+  
+    for fileScanner.Scan() {
+        text := fileScanner.Text()
+		words := strings.Fields(text)
+		if(words[0]==key){
+			return words[1],nil
+		}
+    }
+
+	return  "", errors.New("no key found")
+}
